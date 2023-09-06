@@ -1,34 +1,32 @@
+const TELEGRAPH_URL = 'https://huggingface.co/spaces/qinglin96/chatgpt-academic-freeai';
+
 export default {
   async fetch(request, env) {
-    // 调用 handleRequest 函数
-    const newResponse = await handleRequest(request);
-    return newResponse;
-  }
+    const NewResponse = await handleRequest(request);
+    return NewResponse;
+  },
 };
 
 async function handleRequest(request) {
-  // 定义目标URL
-  const targetUrl = 'https://huggingface.co/spaces/qinglin96/chatgpt-academic-freeai';
+  const url = new URL(request.url);
+  const headers_Origin =
+    request.headers.get('Access-Control-Allow-Origin') || '*';
 
-  // 创建一个新的URL对象，使用目标URL
-  const newUrl = new URL(targetUrl);
+  // 将整个 TELEGRAPH_URL 替换掉传入请求的 URL
+  url.href = TELEGRAPH_URL;
 
-  // 创建一个新的请求对象，使用新的URL和原始请求的属性
-  const modifiedRequest = new Request(newUrl.toString(), {
-    method: request.method,
+  const modifiedRequest = new Request(url.toString(), {
     headers: request.headers,
+    method: request.method,
     body: request.body,
-    redirect: 'follow'
+    redirect: 'follow',
   });
 
-  // 发送修改后的请求到目标URL
   const response = await fetch(modifiedRequest);
-
-  // 创建新的响应对象，将目标URL的响应内容和原始响应的一些属性复制到新响应中
   const modifiedResponse = new Response(response.body, response);
 
   // 添加允许跨域访问的响应头
-  modifiedResponse.headers.set('Access-Control-Allow-Origin', '*');
+  modifiedResponse.headers.set('Access-Control-Allow-Origin', headers_Origin);
 
   return modifiedResponse;
 }
