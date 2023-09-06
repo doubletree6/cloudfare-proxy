@@ -1,4 +1,4 @@
-const TELEGRAPH_URL = 'https://huggingface.co/Liu-LAB';
+const TELEGRAPH_URL = 'https://huggingface.co/spaces/qinglin96/chatgpt-academic-freeai';
 
 
 export default {
