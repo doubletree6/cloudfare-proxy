@@ -1,4 +1,4 @@
-const TELEGRAPH_URL = 'https://huggingface.co/spaces/qinglin96/chatgpt-academic-freeai';
+const TELEGRAPH_URL = 'https://huggingface.co/spaces/Liu-LAB/Chatgpt-academic';
 
 export default {
   async fetch(request, env) {
